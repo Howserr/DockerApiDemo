@@ -18,7 +18,7 @@ namespace DockerApiDemo.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Customer>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<Customer>), StatusCodes.Status200OK)]
         public IActionResult Get()
         {
             return Ok(_customersRepository.Get());
@@ -38,7 +38,7 @@ namespace DockerApiDemo.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Customer), StatusCodes.Status201Created)]
         public IActionResult Create(Customer customer)
         {
             _customersRepository.Create(customer);
