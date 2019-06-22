@@ -8,17 +8,26 @@ namespace DockerApiDemo.Tests.GivenARequestToDeleteACustomer
 {
     public class WhenTheCustomerIsNotFound
     {
+        private int _id;
+        private Mock<ICustomersRepository> _customersRepository;
         private NotFoundResult _result;
 
         [SetUp]
         public void SetUp()
         {
-            var customerRepository = new Mock<ICustomersRepository>();
-            customerRepository.Setup(mock => mock.Delete(It.IsAny<int>())).Returns(false);
+            _id = 1;
+            _customersRepository = new Mock<ICustomersRepository>();
+            _customersRepository.Setup(mock => mock.Delete(It.IsAny<int>())).Returns(false);
 
-            var subject = new CustomersController(customerRepository.Object);
+            var subject = new CustomersController(_customersRepository.Object);
 
-            _result = subject.Delete(1) as NotFoundResult;
+            _result = subject.Delete(_id) as NotFoundResult;
+        }
+
+        [Test]
+        public void ThenTheCustomerIsDeletedThroughTheRepository()
+        {
+            _customersRepository.Verify(mock => mock.Delete(_id), Times.Once);
         }
 
         [Test]

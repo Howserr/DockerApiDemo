@@ -11,20 +11,30 @@ namespace DockerApiDemo.Tests.GivenARequestToGetAllCustomers
 {
     public class WhenThereAreNoCustomers
     {
-        [Test]
-        public void ThenAnEmptyListIsReturned()
+        private OkObjectResult _result;
+
+        [SetUp]
+        public void SetUp()
         {
             var customersRepository = new Mock<ICustomersRepository>();
-            customersRepository.Setup(mock => mock.Get()).Returns(new Customer[]{});
+            customersRepository.Setup(mock => mock.Get()).Returns(new Customer[] { });
 
             var subject = new CustomersController(customersRepository.Object);
 
-            var result = subject.Get() as OkObjectResult;
+            _result = subject.Get() as OkObjectResult;
+        }
 
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.TypeOf<OkObjectResult>());
+        [Test]
+        public void ThenAnOkResponseIsReturned()
+        {
+            Assert.That(_result, Is.Not.Null);
+            Assert.That(_result, Is.TypeOf<OkObjectResult>());
+        }
 
-            var resultCustomers = result.Value as IEnumerable<Customer>;
+        [Test]
+        public void ThenAllTheCustomersAreReturned()
+        {
+            var resultCustomers = _result.Value as IEnumerable<Customer>;
 
             Assert.That(resultCustomers.Count, Is.EqualTo(0));
         }

@@ -26,7 +26,6 @@ namespace DockerApiDemo.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
-        
         public IActionResult GetById(int id)
         {
             var customer = _customersRepository.GetById(id);
@@ -47,8 +46,8 @@ namespace DockerApiDemo.Controllers
         }
 
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-
         public IActionResult Delete(int id)
         {
             var successful = _customersRepository.Delete(id);
@@ -56,6 +55,18 @@ namespace DockerApiDemo.Controllers
                 return NotFound();
 
             return NoContent();
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Update(Customer customer)
+        {
+            var successful = _customersRepository.Update(customer);
+            if (!successful)
+                return NotFound();
+
+            return Ok(customer);
         }
     }
 }

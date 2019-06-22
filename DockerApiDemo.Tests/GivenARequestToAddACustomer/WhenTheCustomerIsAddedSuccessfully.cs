@@ -12,6 +12,7 @@ namespace DockerApiDemo.Tests.GivenARequestToAddACustomer
         private Customer _customer;
         private CreatedAtActionResult _result;
         private Customer _resultCustomer;
+        private Mock<ICustomersRepository> _customerRepository;
 
         [SetUp]
         public void SetUp()
@@ -24,10 +25,10 @@ namespace DockerApiDemo.Tests.GivenARequestToAddACustomer
                 Password = "Password1"
             };
 
-            var customerRepository = new Mock<ICustomersRepository>();
-            customerRepository.Setup(mock => mock.Create(It.IsAny<Customer>())).Callback(() => _customer.Id = 1);
+            _customerRepository = new Mock<ICustomersRepository>();
+            _customerRepository.Setup(mock => mock.Create(It.IsAny<Customer>())).Callback(() => _customer.Id = 1);
 
-            var subject = new CustomersController(customerRepository.Object);
+            var subject = new CustomersController(_customerRepository.Object);
 
             _result = subject.Create(_customer) as CreatedAtActionResult;
             _resultCustomer = _result.Value as Customer;

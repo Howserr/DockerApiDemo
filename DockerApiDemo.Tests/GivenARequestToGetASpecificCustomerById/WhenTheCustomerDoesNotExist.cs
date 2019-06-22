@@ -10,7 +10,7 @@ namespace DockerApiDemo.Tests.GivenARequestToGetASpecificCustomerById
     public class WhenTheCustomerDoesNotExist
     {
         [Test]
-        public void ThenA404ErrorIsReturned()
+        public void ThenANotFoundResponseIsReturned()
         {
             var customersRepository = new Mock<ICustomersRepository>();
             customersRepository.Setup(mock => mock.GetById(1)).Returns(default(Customer));

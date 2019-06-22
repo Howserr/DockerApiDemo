@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DockerApiDemo.Models;
 
 namespace DockerApiDemo.Data
@@ -9,6 +10,7 @@ namespace DockerApiDemo.Data
         Customer GetById(int id);
         void Create(Customer customer);
         bool Delete(int id);
+        bool Update(Customer customer);
     }
 
     public class CustomersRepository : ICustomersRepository
@@ -34,6 +36,22 @@ namespace DockerApiDemo.Data
         {
             _context.Customers.Add(customer);
             _context.SaveChanges();
+        }
+
+        public bool Update(Customer customer)
+        {
+            var existingCustomer = _context.Customers.Find(customer.Id);
+            if (existingCustomer == null)
+                return false;
+
+            existingCustomer.FirstName = customer.FirstName;
+            existingCustomer.LastName = customer.LastName;
+            existingCustomer.Email = customer.Email;
+            existingCustomer.Password = customer.Password;
+
+            _context.Customers.Update(existingCustomer);
+            _context.SaveChanges();
+            return true;
         }
 
         public bool Delete(int id)
