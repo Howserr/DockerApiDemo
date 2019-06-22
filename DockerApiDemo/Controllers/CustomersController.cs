@@ -26,7 +26,7 @@ namespace DockerApiDemo.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        
         public IActionResult GetById(int id)
         {
             var customer = _customersRepository.GetById(id);
@@ -40,10 +40,22 @@ namespace DockerApiDemo.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public object Create(Customer customer)
+        public IActionResult Create(Customer customer)
         {
             _customersRepository.Create(customer);
             return CreatedAtAction(nameof(GetById), new { id = customer.Id }, customer);
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        public IActionResult Delete(int id)
+        {
+            var successful = _customersRepository.Delete(id);
+            if (!successful)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }

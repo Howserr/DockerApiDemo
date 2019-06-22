@@ -1,6 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using DockerApiDemo.Models;
 
 namespace DockerApiDemo.Data
@@ -10,6 +8,7 @@ namespace DockerApiDemo.Data
         IEnumerable<Customer> Get();
         Customer GetById(int id);
         void Create(Customer customer);
+        bool Delete(int id);
     }
 
     public class CustomersRepository : ICustomersRepository
@@ -35,6 +34,17 @@ namespace DockerApiDemo.Data
         {
             _context.Customers.Add(customer);
             _context.SaveChanges();
+        }
+
+        public bool Delete(int id)
+        {
+            var customer = GetById(id);
+            if (customer == null)
+                return false;
+
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
+            return true;
         }
     }
 }
