@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using DockerApiDemo.Models;
 
@@ -7,47 +8,33 @@ namespace DockerApiDemo.Data
     public interface ICustomersRepository
     {
         IEnumerable<Customer> Get();
-        Customer Get(int id);
+        Customer GetById(int id);
+        void Create(Customer customer);
     }
 
     public class CustomersRepository : ICustomersRepository
     {
-        private readonly Customer[] _customers = new[]
+        private readonly DockerApiDemoContext _context;
+
+        public CustomersRepository(DockerApiDemoContext context)
         {
-            new Customer
-            {
-                Id = 1,
-                FirstName = "Max",
-                LastName = "Verstappen",
-                Email = "m.verstappen@redbull.com",
-                Password = "No1R4cer"
-            },
-            new Customer
-            {
-                Id = 2,
-                FirstName = "Daniel",
-                LastName = "Ricciardo",
-                Email = "d.ricciardo@renault.com",
-                Password = "b1gSM1L35"
-            },
-            new Customer
-            {
-                Id = 3,
-                FirstName = "Kimi",
-                LastName = "Raikkonen",
-                Email = "k.raikkonen@alfaromeo.com",
-                Password = "1W4SHaving4!*&$"
-            }
-        };
+            _context = context;
+        }
 
         public IEnumerable<Customer> Get()
         {
-            return _customers;
+            return _context.Customers;
         }
 
-        public Customer Get(int id)
+        public Customer GetById(int id)
         {
-            return _customers.FirstOrDefault(customer => customer.Id == id);
+            return _context.Customers.Find(id);
+        }
+
+        public void Create(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
         }
     }
 }

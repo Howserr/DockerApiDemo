@@ -1,7 +1,6 @@
 ﻿using DockerApiDemo.Controllers;
 using DockerApiDemo.Data;
 using DockerApiDemo.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -14,11 +13,11 @@ namespace DockerApiDemo.Tests.GivenARequestToGetASpecificCustomerById
         public void ThenA404ErrorIsReturned()
         {
             var customersRepository = new Mock<ICustomersRepository>();
-            customersRepository.Setup(mock => mock.Get(1)).Returns(default(Customer));
+            customersRepository.Setup(mock => mock.GetById(1)).Returns(default(Customer));
 
             var subject = new CustomersController(customersRepository.Object);
 
-            var result = subject.Get(1);
+            var result = subject.GetById(1);
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.TypeOf<NotFoundResult>());

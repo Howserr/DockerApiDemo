@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DockerApiDemo.Controllers;
+﻿using DockerApiDemo.Controllers;
 using DockerApiDemo.Data;
 using DockerApiDemo.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +25,11 @@ namespace DockerApiDemo.Tests.GivenARequestToGetASpecificCustomerById
             };
 
             var customersRepository = new Mock<ICustomersRepository>();
-            customersRepository.Setup(mock => mock.Get(1)).Returns(_customer);
+            customersRepository.Setup(mock => mock.GetById(1)).Returns(_customer);
 
             var subject = new CustomersController(customersRepository.Object);
 
-            _result = subject.Get(1) as OkObjectResult;
+            _result = subject.GetById(1) as OkObjectResult;
         }
 
         [Test]

@@ -27,15 +27,23 @@ namespace DockerApiDemo.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get(int id)
+        public IActionResult GetById(int id)
         {
-            var customer = _customersRepository.Get(id);
+            var customer = _customersRepository.GetById(id);
             if (customer == null)
             {
                 return NotFound();
             }
 
             return Ok(customer);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public object Create(Customer customer)
+        {
+            _customersRepository.Create(customer);
+            return CreatedAtAction(nameof(GetById), new { id = customer.Id , customer});
         }
     }
 }
