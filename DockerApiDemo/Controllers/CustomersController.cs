@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DockerApiDemo.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DockerApiDemo.Controllers
@@ -7,10 +8,19 @@ namespace DockerApiDemo.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        private readonly ICustomersRepository _customersRepository;
+
+        public CustomersController(ICustomersRepository customersRepository)
+        {
+            _customersRepository = customersRepository;
+        }
+
+        public CustomersController() : this(new CustomersRepository()) { }
+
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new ActionResult<IEnumerable<string>>(new List<string>{ "Max", "Daniel", "Kimi"});
+            return new ActionResult<IEnumerable<string>>(_customersRepository.Get());
         }
     }
 }
