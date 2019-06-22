@@ -15,8 +15,6 @@ namespace DockerApiDemo.Controllers
             _customersRepository = customersRepository;
         }
 
-        public CustomersController() : this(new CustomersRepository()) { }
-
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {

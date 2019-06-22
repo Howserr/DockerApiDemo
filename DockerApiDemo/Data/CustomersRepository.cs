@@ -11,7 +11,7 @@ namespace DockerApiDemo.Data
     {
         public IEnumerable<string> Get()
         {
-            throw new System.NotImplementedException();
+            return new string[] {"Max", "Daniel", "Kimi"};
         }
     }
 }
