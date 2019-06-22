@@ -43,7 +43,7 @@ namespace DockerApiDemo.Controllers
         public object Create(Customer customer)
         {
             _customersRepository.Create(customer);
-            return CreatedAtAction(nameof(GetById), new { id = customer.Id , customer});
+            return CreatedAtAction(nameof(GetById), new { id = customer.Id }, customer);
         }
     }
 }
