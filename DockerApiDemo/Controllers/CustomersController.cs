@@ -20,5 +20,11 @@ namespace DockerApiDemo.Controllers
         {
             return new ActionResult<IEnumerable<Customer>>(_customersRepository.Get());
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<Customer> Get(int id)
+        {
+            return new ActionResult<Customer>(_customersRepository.Get(id));
+        }
     }
 }
