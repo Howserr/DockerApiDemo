@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DockerApiDemo.Controllers;
 using DockerApiDemo.Data;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 
@@ -9,10 +10,13 @@ namespace DockerApiDemo.Tests.GivenARequestToGetAllCustomers
 {
     public class WhenThereAreCustomers
     {
-        [Test]
-        public void ThenAllTheCustomersAreReturned()
+        private Customer[] _customers;
+        private OkObjectResult _result;
+
+        [SetUp]
+        public void SetUp()
         {
-            var customers = new[]
+            _customers = new[]
             {
                 new Customer
                 {
@@ -38,16 +42,28 @@ namespace DockerApiDemo.Tests.GivenARequestToGetAllCustomers
             };
 
             var customersRepository = new Mock<ICustomersRepository>();
-            customersRepository.Setup(mock => mock.Get()).Returns(customers);
+            customersRepository.Setup(mock => mock.Get()).Returns(_customers);
 
             var subject = new CustomersController(customersRepository.Object);
 
-            var result = subject.Get().Value.ToList();
+            _result = subject.Get() as OkObjectResult;
+        }
 
-            Assert.That(result.Count, Is.EqualTo(3));
-            Assert.That(result.Contains(customers[0]));
-            Assert.That(result.Contains(customers[1]));
-            Assert.That(result.Contains(customers[2]));
+        [Test]
+        public void ThenAnOkResponseIsReturned()
+        {
+            Assert.That(_result, Is.Not.Null);
+            Assert.That(_result, Is.TypeOf<OkObjectResult>());
+        }
+
+        [Test]
+        public void ThenAllTheCustomersAreReturned()
+        {
+            var resultCustomers = _result.Value as IEnumerable<Customer>;
+
+            Assert.That(resultCustomers.Contains(_customers[0]));
+            Assert.That(resultCustomers.Contains(_customers[1]));
+            Assert.That(resultCustomers.Contains(_customers[2]));
         }
     }
 }

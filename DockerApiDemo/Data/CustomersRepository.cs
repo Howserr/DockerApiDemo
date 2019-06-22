@@ -11,7 +11,7 @@ namespace DockerApiDemo.Data
 
     public class CustomersRepository : ICustomersRepository
     {
-        private Customer[] _customers = new[]
+        private readonly Customer[] _customers = new[]
         {
             new Customer
             {

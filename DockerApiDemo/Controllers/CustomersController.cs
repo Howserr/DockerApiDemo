@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DockerApiDemo.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DockerApiDemo.Controllers
@@ -16,15 +17,24 @@ namespace DockerApiDemo.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Customer>> Get()
+        [ProducesResponseType(typeof(IEnumerable<Customer>), StatusCodes.Status200OK)]
+        public IActionResult Get()
         {
-            return new ActionResult<IEnumerable<Customer>>(_customersRepository.Get());
+            return Ok(_customersRepository.Get());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Customer> Get(int id)
+        [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Get(int id)
         {
-            return new ActionResult<Customer>(_customersRepository.Get(id));
+            var customer = _customersRepository.Get(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(customer);
         }
     }
 }
