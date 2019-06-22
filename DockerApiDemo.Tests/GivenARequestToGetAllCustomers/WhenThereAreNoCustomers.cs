@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DockerApiDemo.Controllers;
 using DockerApiDemo.Data;
+using DockerApiDemo.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;

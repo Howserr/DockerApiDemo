@@ -1,5 +1,6 @@
 ﻿using DockerApiDemo.Controllers;
 using DockerApiDemo.Data;
+using DockerApiDemo.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

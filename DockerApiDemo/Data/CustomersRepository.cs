@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DockerApiDemo.Models;
 
 namespace DockerApiDemo.Data
 {
@@ -48,14 +49,5 @@ namespace DockerApiDemo.Data
         {
             return _customers.FirstOrDefault(customer => customer.Id == id);
         }
-    }
-
-    public class Customer
-    {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
     }
 }
