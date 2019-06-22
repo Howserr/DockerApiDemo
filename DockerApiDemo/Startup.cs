@@ -27,11 +27,11 @@ namespace DockerApiDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ICustomersRepository, CustomersRepository>();
-
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=DemoDb;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = $"Data Source=db;Initial Catalog=master;User ID=sa;Password=Testing123;";
             services.AddDbContext<DockerApiDemoContext>(opt => opt.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<ICustomersRepository, CustomersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +39,7 @@ namespace DockerApiDemo
         {
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
