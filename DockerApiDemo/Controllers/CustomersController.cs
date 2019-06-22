@@ -16,9 +16,9 @@ namespace DockerApiDemo.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Customer>> Get()
         {
-            return new ActionResult<IEnumerable<string>>(_customersRepository.Get());
+            return new ActionResult<IEnumerable<Customer>>(_customersRepository.Get());
         }
     }
 }

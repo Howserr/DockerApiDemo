@@ -12,7 +12,7 @@ namespace DockerApiDemo.Tests.GivenARequestToGetAllCustomers
         public void ThenAnEmptyListIsReturned()
         {
             var customersRepository = new Mock<ICustomersRepository>();
-            customersRepository.Setup(mock => mock.Get()).Returns(new string[]{});
+            customersRepository.Setup(mock => mock.Get()).Returns(new Customer[]{});
 
             var subject = new CustomersController(customersRepository.Object);
 
