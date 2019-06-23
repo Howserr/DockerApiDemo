@@ -45,7 +45,7 @@ namespace DockerApiDemo.Controllers
             return CreatedAtAction(nameof(GetById), new { id = customer.Id }, customer);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete(int id)
