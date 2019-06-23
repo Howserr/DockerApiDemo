@@ -12,16 +12,16 @@ Examples of these requests for use in Powershell can be seen below. Alternativel
 
 ### Sample web requests:
 #### Get All: 
-curl https://localhost:44339/api/customers
+`curl https://localhost:44339/api/customers`
 
 #### Get specific id: 
-curl https://localhost:44339/api/customers/1
+`curl https://localhost:44339/api/customers/1`
 
 #### Create customer: 
-curl -d '{"firstName": "Alex","lastName": "Albon","email": "a.albon@mclaren.com" "password": "IDriveFast123"}' -H "Content-Type: application/json" -X POST https://localhost:44339/api/customers
+`curl -d '{"firstName": "Alex","lastName": "Albon","email": "a.albon@mclaren.com" "password": "IDriveFast123"}' -H "Content-Type: application/json" -X POST https://localhost:44339/api/customers`
 
 ####Patch customer: 
-curl -d '{"id": 1, firstName": "Alex","lastName": "Albon","email": "a.albon@mclaren.com" "password": "IDriveFast123"}' -H "Content-Type: application/json" -X PATCH https://localhost:44339/api/customers
+`curl -d '{"id": 1, firstName": "Alex","lastName": "Albon","email": "a.albon@mclaren.com" "password": "IDriveFast123"}' -H "Content-Type: application/json" -X PATCH https://localhost:44339/api/customers`
 
 #### Delete customer:  
-curl -X DELETE https://localhost:44339/api/customers/1 
+`curl -X DELETE https://localhost:44339/api/customers/1`
