@@ -1,7 +1,7 @@
 # .NET Core API with SQL Server DB deployed through Docker
 
 ## Packaging instructions:
-- To simply build, package and start a container for the API using the script [build_and_package.ps1](./DockerApi/Demo)
+- To simply build, package and start a container for the API using the script [build_and_package.ps1](./DockerApiDemo/build_and_package.ps1)
 - To deploy the API and DB to seperate docker containers, from the DockerApiDemo project folder run "docker-compose up --build"
 
 
