@@ -1,16 +1,16 @@
 # .NET Core API with SQL Server DB deployed through Docker
 
-## Packaging instructions:
+## Packaging Instructions:
 - To simply build, package and start a container for the API using the script [build_and_package.ps1](./DockerApiDemo/build_and_package.ps1)
 - To deploy the API and DB to seperate docker containers, from the DockerApiDemo project folder run "docker-compose up --build"
 
 
-## API Usage instructions:
+## API Usage Instructions:
 The API has a single restful controller, Customers, which supports the HTTP verbs GET, PUT, PATCH, DELETE.
 
 Examples of these requests for use in Powershell can be seen below. Alternatively, [integration_test.ps1](integration_test.ps1) demonstrates building, deploying and using all endpoints.
 
-### Sample web requests:
+### Sample Web Requests:
 #### Get All: 
 `curl https://localhost:44339/api/customers`
 
