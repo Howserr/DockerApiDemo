@@ -20,7 +20,7 @@ Examples of these requests for use in Powershell can be seen below. Alternativel
 #### Create customer: 
 `curl -d '{"firstName": "Alex","lastName": "Albon","email": "a.albon@mclaren.com" "password": "IDriveFast123"}' -H "Content-Type: application/json" -X POST https://localhost:44339/api/customers`
 
-####Patch customer: 
+#### Patch customer: 
 `curl -d '{"id": 1, firstName": "Alex","lastName": "Albon","email": "a.albon@mclaren.com" "password": "IDriveFast123"}' -H "Content-Type: application/json" -X PATCH https://localhost:44339/api/customers`
 
 #### Delete customer:  
