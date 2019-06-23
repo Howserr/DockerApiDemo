@@ -57,7 +57,7 @@ namespace DockerApiDemo.Controllers
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPatch]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Update(Customer customer)
