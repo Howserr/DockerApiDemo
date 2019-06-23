@@ -8,6 +8,12 @@
 ## API Usage Instructions:
 The API has a single restful controller, Customers, which supports the HTTP verbs GET, PUT, PATCH, DELETE.
 
+The Customer model is:
+Id: int (Does not need to be specified on creation as it will be automatically generated as the next sequential id)
+FirstName: string
+LastName: string
+Password: string
+
 Examples of these requests for use in Powershell can be seen below. Alternatively, [integration_test.ps1](integration_test.ps1) demonstrates building, deploying and using all endpoints.
 
 ### Sample Web Requests:
