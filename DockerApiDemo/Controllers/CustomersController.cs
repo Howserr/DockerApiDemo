@@ -39,7 +39,7 @@ namespace DockerApiDemo.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status201Created)]
-        public IActionResult Create(Customer customer)
+        public IActionResult Create([FromBody] Customer customer)
         {
             _customersRepository.Create(customer);
             return CreatedAtAction(nameof(GetById), new { id = customer.Id }, customer);
@@ -60,7 +60,7 @@ namespace DockerApiDemo.Controllers
         [HttpPatch]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Update(Customer customer)
+        public IActionResult Update([FromBody] Customer customer)
         {
             var successful = _customersRepository.Update(customer);
             if (!successful)
